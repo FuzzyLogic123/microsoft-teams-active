@@ -1,0 +1,18 @@
+2023/09/17-18:02:22.563 3 Reusing MANIFEST /home/patrick/Documents/dev/microsoft-teams-active/user_data/Default/Local Storage/leveldb/MANIFEST-000001
+2023/09/17-18:02:22.564 3 Recovering log #7
+2023/09/17-18:02:22.567 3 Level-0 table #9: started
+2023/09/17-18:02:22.577 3 Level-0 table #9: 381220 bytes OK
+2023/09/17-18:02:22.578 3 Recovering log #8
+2023/09/17-18:02:22.578 3 Level-0 table #10: started
+2023/09/17-18:02:22.582 3 Level-0 table #10: 17125 bytes OK
+2023/09/17-18:02:22.595 3 Delete type=0 #7
+2023/09/17-18:02:22.595 3 Delete type=0 #8
+2023/09/17-18:02:22.595 3 Compacting 4@0 + 0@1 files
+2023/09/17-18:02:22.609 3 Generated table #12@0: 163 keys, 806385 bytes
+2023/09/17-18:02:22.609 3 Compacted 4@0 + 0@1 files => 806385 bytes
+2023/09/17-18:02:22.615 3 compacted to: files[ 0 1 0 0 0 0 0 ]
+2023/09/17-18:02:22.643 3 Delete type=2 #9
+2023/09/17-18:02:22.643 3 Delete type=2 #3
+2023/09/17-18:02:22.643 3 Delete type=2 #6
+2023/09/17-18:02:22.643 3 Delete type=2 #10
+2023/09/17-18:02:29.366 4 Level-0 table #14: started
