@@ -39,23 +39,18 @@ const getActivityRequest = async () => {
 
 const makeRequests = async (activityRequest) => {
     activityRequest.body = JSON.stringify({ ...JSON.parse(activityRequest.body), isActive: true });
-    setInterval(() => {
-        fetch(activityRequest.url, activityRequest);
+    const interval = setInterval(() => {
+        if (new Date().getHours() <= 16) {
+            fetch(activityRequest.url, activityRequest);
+        } else {
+            clearInterval(interval);
+        }
     }, 1000 * 60 * 5)
 }
 
 async function main() {
-    while (true) {
-        const now = new Date();
-        const dayOfWeek = now.getDay();
-        const hours = now.getHours();
-        if (dayOfWeek >= 1 && dayOfWeek <= 5 && hours >= 9 && hours < 17) {
-            await getActivityRequest();
-            makeRequests(activityRequest);
-        } else {
-            await new Promise(resolve => setTimeout(resolve, 1000 * 60));
-        }
-    }
+    await getActivityRequest();
+    makeRequests(activityRequest);
 }
 
 main();
