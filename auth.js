@@ -5,7 +5,7 @@ const getActivityRequest = async () => {
     const puppeteer = require('puppeteer');
 
     await (async () => {
-        const browser = await puppeteer.launch({ headless: false, userDataDir: './user_data' });
+        const browser = await puppeteer.launch({ headless: true, userDataDir: './user_data' });
         const page = await browser.newPage();
 
         await page.setRequestInterception(true);
@@ -37,20 +37,34 @@ const getActivityRequest = async () => {
     })();
 }
 
-const makeRequests = async (activityRequest) => {
+const makeRequests = async () => {
     activityRequest.body = JSON.stringify({ ...JSON.parse(activityRequest.body), isActive: true });
-    const interval = setInterval(() => {
+    const interval = setInterval(async () => {
         if (new Date().getHours() <= 16) {
-            fetch(activityRequest.url, activityRequest);
+            const result = await fetch(activityRequest.url, activityRequest);
+            const contentType = result.headers.get('Content-Type');
+            if (contentType && contentType.includes('text')) {
+                console.log(result.text());
+            }
+
+            if (result.status !== 200) {
+                console.log("Re-authorizing")
+                try {
+                    await getActivityRequest();
+                } catch (e) {
+                    console.log(e)
+                }
+            }
         } else {
+            console.log("After 5pm, stopping requests")
             clearInterval(interval);
         }
-    }, 1000 * 60 * 5)
+    }, 1000 * 60 * 1)
 }
 
 async function main() {
     await getActivityRequest();
-    makeRequests(activityRequest);
+    makeRequests();
 }
 
 main();
